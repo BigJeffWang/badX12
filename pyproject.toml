@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
 ]
 requires = [
-    "click==8.0",
+    "click==24.2.0",
     "dicttoxml==1.7.4",
 ]
 description-file = "README.md"
