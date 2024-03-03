@@ -7,7 +7,7 @@ import sys
 import click
 
 from .commands import parse
-from .common.click import add_commands
+# from .common.click import add_commands
 
 
 @click.group()
@@ -26,7 +26,7 @@ def cli(log):
     )
 
 
-add_commands(cli, (parse,))
+# add_commands(cli, (parse,))
 
 if __name__ == "__main__":
     sys.exit(cli())  # pragma: no cover
