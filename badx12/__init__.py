@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Top-level package for badX12."""
-from .__main__ import cli
+# from .__main__ import cli
 from .document import EDIDocument
 from .parser import Parser
 

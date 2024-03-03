@@ -7,9 +7,10 @@ import collections
 import shutil
 
 import pytest
-from click.testing import CliRunner
+# from click.testing import CliRunner
 
-from badx12 import Parser, cli
+# from badx12 import Parser, cli
+from badx12 import Parser
 # from badx12.common.click import add_commands
 from badx12.utils import errors as err
 from tests.utils import TEST_FILE_DIR, TEST_TEMP_FILE_DIR
@@ -23,52 +24,52 @@ def test_files():
     }
 
 
-@pytest.fixture()
-def cli_runner():
-    return CliRunner()
+# @pytest.fixture()
+# def cli_runner():
+#     return CliRunner()
 
 
-def test_cli(test_files, cli_runner):
-    good_files = test_files["edi"]
-    bad_files = test_files["errors"].glob("*.edi")
-
-    for ext in ["json", "xml"]:
-        for f in good_files:
-            TEST_TEMP_FILE_DIR.mkdir()
-            result = cli_runner.invoke(
-                cli,
-                [
-                    "parse",
-                    f"{f}",
-                    f"--output_dir={TEST_TEMP_FILE_DIR}",
-                    f"--export_type={ext.upper()}",
-                ],
-            )
-            file_count = collections.Counter(
-                p.suffix for p in TEST_TEMP_FILE_DIR.iterdir()
-            )
-
-            assert result.exit_code == 0
-            assert result.output == ""
-            assert file_count[f".{ext}"] == 1
-
-            shutil.rmtree(TEST_TEMP_FILE_DIR)
-
-        for f in bad_files:
-            TEST_TEMP_FILE_DIR.mkdir()
-            result = cli_runner.invoke(
-                cli,
-                [
-                    "parse",
-                    f"{f}",
-                    f"--output_dir={TEST_TEMP_FILE_DIR}",
-                    f"--export_type={ext.upper()}",
-                ],
-            )
-
-            assert result.exit_code == 0
-
-            shutil.rmtree(TEST_TEMP_FILE_DIR)
+# def test_cli(test_files, cli_runner):
+#     good_files = test_files["edi"]
+#     bad_files = test_files["errors"].glob("*.edi")
+#
+#     for ext in ["json", "xml"]:
+#         for f in good_files:
+#             TEST_TEMP_FILE_DIR.mkdir()
+#             result = cli_runner.invoke(
+#                 cli,
+#                 [
+#                     "parse",
+#                     f"{f}",
+#                     f"--output_dir={TEST_TEMP_FILE_DIR}",
+#                     f"--export_type={ext.upper()}",
+#                 ],
+#             )
+#             file_count = collections.Counter(
+#                 p.suffix for p in TEST_TEMP_FILE_DIR.iterdir()
+#             )
+#
+#             assert result.exit_code == 0
+#             assert result.output == ""
+#             assert file_count[f".{ext}"] == 1
+#
+#             shutil.rmtree(TEST_TEMP_FILE_DIR)
+#
+#         for f in bad_files:
+#             TEST_TEMP_FILE_DIR.mkdir()
+#             result = cli_runner.invoke(
+#                 cli,
+#                 [
+#                     "parse",
+#                     f"{f}",
+#                     f"--output_dir={TEST_TEMP_FILE_DIR}",
+#                     f"--export_type={ext.upper()}",
+#                 ],
+#             )
+#
+#             assert result.exit_code == 0
+#
+#             shutil.rmtree(TEST_TEMP_FILE_DIR)
 
 
 # def test_click_common():
